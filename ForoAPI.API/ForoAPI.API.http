@@ -1,0 +1,4 @@
+@ForoAPI_API_HostAddress = http://localhost:5115
+
+GET {{ForoAPI_API_HostAddress}}/weatherforecast/
+Accept: application/json
