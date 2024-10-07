@@ -13,5 +13,6 @@ namespace ForoAPI.Infraestructure.Persistance.Interfaces
         public Task<Post> Add(Post post, User author);
         public Task<Post> Edit(Post post);
         public Task<Post> Delete(Post post);
+        public Task<BaseEntityResponse<Post>> GetAll();
     }
 }

@@ -2,6 +2,7 @@
 using ForoAPI.Infraestructure.Persistance.Context;
 using ForoAPI.Infraestructure.Persistance.Interfaces;
 using Infrastructure.Commons.Bases;
+using Microsoft.EntityFrameworkCore;
 
 namespace ForoAPI.Infraestructure.Persistance.Repositories
 {
@@ -38,6 +39,16 @@ namespace ForoAPI.Infraestructure.Persistance.Repositories
             return post;
         }
 
+        public async Task<BaseEntityResponse<Post>> GetAll()
+        {
+            var posts = await _context.Posts.ToListAsync();
+
+            return new BaseEntityResponse<Post>
+            {
+                TotalRecords = posts.Count, // Set the total number of records
+                Items = posts // Set the retrieved posts
+            };
+        }
 
     }
 }

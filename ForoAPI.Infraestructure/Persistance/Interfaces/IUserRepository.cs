@@ -10,7 +10,7 @@ namespace ForoAPI.Infraestructure.Persistance.Interfaces
 {
     public interface IUserRepository
     {
-        public Task<BaseEntityResponse<User>> GetUsers();
+        public Task<BaseEntityResponse<User>> GetAll();
         public Task<User> Add(User user);
         public Task<User> Edit(User user);
         public Task<User> Delete(User user);

@@ -2,6 +2,7 @@
 using ForoAPI.Infraestructure.Persistance.Context;
 using ForoAPI.Infraestructure.Persistance.Interfaces;
 using Infrastructure.Commons.Bases;
+using Microsoft.EntityFrameworkCore;
 
 namespace ForoAPI.Infraestructure.Persistance.Repositories
 {
@@ -14,24 +15,36 @@ namespace ForoAPI.Infraestructure.Persistance.Repositories
         {
             _context = context;
         }
-        public Task<User> Add(User user)
+        public async Task<User> Add(User user)
         {
-            throw new NotImplementedException();
+           await _context.Users.AddAsync(user);
+           await _context.SaveChangesAsync();
+           return user;
         }
 
-        public Task<User> Delete(User user)
+        public async Task<User> Delete(User user)
         {
-            throw new NotImplementedException();
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
 
-        public Task<User> Edit(User user)
+        public async Task<User> Edit(User user)
         {
-            throw new NotImplementedException();
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
 
-        public Task<BaseEntityResponse<User>> GetUsers()
+        public async Task<BaseEntityResponse<User>> GetAll()
         {
-            throw new NotImplementedException();
+            var users = await _context.Users.ToListAsync();
+
+            return new BaseEntityResponse<User>
+            {
+                TotalRecords = users.Count, // Set the total number of records
+                Items = users// Set the retrieved posts
+            };
         }
     }
 }
