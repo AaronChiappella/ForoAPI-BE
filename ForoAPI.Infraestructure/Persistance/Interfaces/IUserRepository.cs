@@ -12,9 +12,10 @@ namespace ForoAPI.Infraestructure.Persistance.Interfaces
     {
         public Task<BaseEntityResponse<User>> GetAll();
         public Task<User> Add(User user);
-        public Task<User> Edit(User user);
+        public Task<User> Update(User user);
         public Task<User> Delete(User user);
 
+        public Task<User> GetById(int id);
 
 
     }

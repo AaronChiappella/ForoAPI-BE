@@ -11,15 +11,15 @@ namespace ForoAPI.Infraestructure.Persistance.Repositories
 
         private readonly ForoApiDbContext _context;
 
-        public UserRepository(ForoApiDbContext context) 
+        public UserRepository(ForoApiDbContext context)
         {
             _context = context;
         }
         public async Task<User> Add(User user)
         {
-           await _context.Users.AddAsync(user);
-           await _context.SaveChangesAsync();
-           return user;
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
 
         public async Task<User> Delete(User user)
@@ -29,7 +29,7 @@ namespace ForoAPI.Infraestructure.Persistance.Repositories
             return user;
         }
 
-        public async Task<User> Edit(User user)
+        public async Task<User> Update(User user)
         {
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
@@ -46,5 +46,15 @@ namespace ForoAPI.Infraestructure.Persistance.Repositories
                 Items = users// Set the retrieved posts
             };
         }
+
+        public async Task<User> GetById(int id)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(e => e.Id == id);
+
+            return user;
+        }
+
+       
+
     }
 }

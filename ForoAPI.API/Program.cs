@@ -1,8 +1,10 @@
+using ForoAPI.Application.Extensions;
 using ForoAPI.Infraestructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add injection infrastructure with configuration
+// Add injection apps e infraestructure
+builder.Services.AddInjectionApplication(builder.Configuration);
 builder.Services.AddInjectionInfrastructure(builder.Configuration);
 
 builder.Services.AddControllers();

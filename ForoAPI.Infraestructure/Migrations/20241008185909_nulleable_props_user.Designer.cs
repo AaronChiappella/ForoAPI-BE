@@ -4,6 +4,7 @@ using ForoAPI.Infraestructure.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForoAPI.Infraestructure.Migrations
 {
     [DbContext(typeof(ForoApiDbContext))]
-    partial class ForoApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241008185909_nulleable_props_user")]
+    partial class nulleable_props_user
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,6 +1,6 @@
 ﻿using ForoAPI.Application.Dtos;
 using ForoAPI.Application.Interfaces;
-using InventoryApi.Application.Commons;
+using ForoAPI.Application.Commons;
 using System;
 using System.Collections.Generic;
 using System.Linq;

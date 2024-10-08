@@ -1,5 +1,5 @@
 ﻿using ForoAPI.Application.Dtos;
-using InventoryApi.Application.Commons;
+using ForoAPI.Application.Commons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
