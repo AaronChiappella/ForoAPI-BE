@@ -19,23 +19,51 @@ namespace ForoAPI.Application.Services
             _mapper = mapper;
         }
 
+        public async Task<BaseResponse<UserResDto>> Authenticate(UserLoginDto loginDto)
+        {
+            var response = new BaseResponse<UserResDto>();
+
+            // Buscar al usuario por su email
+            var user = await _unitOfWork.Users.GetByEmail(loginDto.Email); // Cambia esto por tu método de repositorio para obtener el usuario por email.
+
+            // Verificar si se encontró un usuario y si la contraseña ingresada es correcta
+            if (user != null && BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
+            {
+                // Si la contraseña es válida, retornar éxito
+                response.IsSuccess = true;
+                response.Data = _mapper.Map<UserResDto>(user);
+                response.Message = ReplyMessages.MESSAGE_QUERY;
+            }
+            else
+            {
+                // Si no, retornar fallo con mensaje de error
+                response.IsSuccess = false;
+                response.Message = "Email o contraseña incorrectos";
+            }
+
+            return response;
+        }
+
+
+
         public async Task<BaseResponse<UserResDto>> Create(UserReqDto userReqDto)
         {
             var response = new BaseResponse<UserResDto>();
 
-            // Map UserReqDto to User entity
-            var user = _mapper.Map<User>(userReqDto);
+            // Cifrar la contraseña antes de guardar
+            userReqDto.Password = BCrypt.Net.BCrypt.HashPassword(userReqDto.Password);
 
-            // Add user to repository
+            var user = _mapper.Map<User>(userReqDto);
+            user.Activo = true;
             var newUser = await _unitOfWork.Users.Add(user);
 
-            // Map the newly created user to UserResDto
             response.IsSuccess = true;
             response.Data = _mapper.Map<UserResDto>(newUser);
             response.Message = ReplyMessages.MESSAGE_QUERY;
 
             return response;
         }
+
 
         public async Task<BaseResponse<UserResDto>> Delete(int id)
         {
@@ -119,5 +147,10 @@ namespace ForoAPI.Application.Services
 
             return response;
         }
+
+
+
+
+
     }
 }

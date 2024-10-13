@@ -9,6 +9,7 @@ namespace ForoAPI.Application.Interfaces
         Task<BaseResponse<UserResDto>> Edit(UserReqDto user);
         Task<BaseResponse<UserResDto>> Delete(int id);
         Task<BaseResponse<UserResDto>> Create(UserReqDto user);
-    
+
+        Task<BaseResponse<UserResDto>> Authenticate(UserLoginDto loginDto);
     }
 }

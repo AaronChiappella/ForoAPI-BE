@@ -75,7 +75,24 @@ namespace ForoAPI.API.Controllers
             return NotFound(response); // Return 404 if the user doesn't exist
         }
 
+        // POST: api/Users/Login
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginDto loginDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            var response = await _userService.Authenticate(loginDto);
+
+            if (response.IsSuccess)
+            {
+                return Ok(response);
+            }
+
+            return Unauthorized(response); // Si la autenticación falla, retornar 401
+        }
 
     }
 }

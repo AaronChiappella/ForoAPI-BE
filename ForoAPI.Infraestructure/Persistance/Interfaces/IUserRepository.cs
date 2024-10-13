@@ -17,6 +17,7 @@ namespace ForoAPI.Infraestructure.Persistance.Interfaces
 
         public Task<User> GetById(int id);
 
+        public Task<User> GetByEmail(string email);
 
     }
 }

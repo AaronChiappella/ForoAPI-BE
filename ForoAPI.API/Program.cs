@@ -10,6 +10,8 @@ builder.Services.AddInjectionInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
+
 
 
 
@@ -33,6 +35,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+
+
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAllOrigins");
