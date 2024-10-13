@@ -10,9 +10,9 @@ namespace ForoAPI.Application.Interfaces
 {
     public interface IPostApplication
     {
-        Task<BaseResponse<PostResDto>> GetAll();
+        Task<BaseResponse<IEnumerable<PostResDto>>> GetAll();
         Task<BaseResponse<PostResDto>> Edit(PostReqDto post);
         Task<BaseResponse<PostResDto>> Delete(int id);
-        Task<BaseResponse<PostResDto>> Create(PostReqDto post);
+        Task<BaseResponse<PostResDto>> Create(PostCreateDto post);
     }
 }

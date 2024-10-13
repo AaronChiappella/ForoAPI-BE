@@ -50,5 +50,11 @@ namespace ForoAPI.Infraestructure.Persistance.Repositories
             };
         }
 
+        public async Task<Post> GetById(int id)
+        {
+            return await _context.Posts.FindAsync(id);
+        }
+
+
     }
 }
