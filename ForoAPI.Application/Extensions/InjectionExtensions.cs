@@ -22,7 +22,10 @@ namespace ForoAPI.Application.Extensions
             services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddScoped<IUserApplication, UserApplication>();
-           
+            services.AddScoped<IPostApplication, PostApplication>();
+
+
+
 
 
             return services;

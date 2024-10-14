@@ -65,8 +65,9 @@ namespace ForoAPI.Application.Services
 
             if (post != null)
             {
-                await _unitOfWork.Posts.Delete(post);
+               var deletedPost = await _unitOfWork.Posts.Delete(post);
                 response.IsSuccess = true;
+                response.Data = _mapper.Map<PostResDto>(deletedPost);
                 response.Message = "Post deleted successfully.";
             }
             else

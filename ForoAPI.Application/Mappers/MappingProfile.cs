@@ -23,6 +23,8 @@ namespace ForoAPI.Application.Mappers
             CreateMap<Post,PostResDto>();
             CreateMap<PostReqDto, Post>();
 
+            CreateMap<PostCreateDto, Post>();
+
 
         }
     }
