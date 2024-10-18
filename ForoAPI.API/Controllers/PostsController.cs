@@ -1,9 +1,12 @@
 ﻿using ForoAPI.Application.Dtos;
 using ForoAPI.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForoAPI.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class PostsController : ControllerBase
     {
         private readonly IPostApplication _postsService;
@@ -24,22 +27,25 @@ namespace ForoAPI.API.Controllers
             return BadRequest(response); // Handling the case where the response fails
         }
 
-        
-        [HttpPost("Create")]
-        public async Task<IActionResult> Create([FromBody] PostCreateDto requestDto)
+
+        [Authorize]
+        [HttpPost("SubmitPost")]
+        public async Task<IActionResult> SubmitPost([FromBody] PostCreateDto postDto)
         {
-            if (!ModelState.IsValid) // Validation check for the DTO
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var response = await _postsService.Create(requestDto);
+            var response = await _postsService.Create(postDto);
             if (response.IsSuccess)
             {
                 return Ok(response);
             }
-            return BadRequest(response); // Handling failure in user creation
+
+            return BadRequest(response);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
